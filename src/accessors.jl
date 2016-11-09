@@ -1,3 +1,5 @@
+import Compat
+
 """
     localtime(::ZonedDateTime) -> DateTime
 
@@ -27,7 +29,7 @@ for period in (:Hour, :Minute, :Second, :Millisecond)
     accessor = Symbol(lowercase(string(period)))
     @eval begin
         $accessor(zdt::ZonedDateTime) = $accessor(localtime(zdt))
-        @vectorize_1arg ZonedDateTime $accessor
+        Compat.@dep_vectorize_1arg ZonedDateTime $accessor
 
         $period(zdt::ZonedDateTime) = $period($accessor(zdt))
     end
