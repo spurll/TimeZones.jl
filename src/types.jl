@@ -3,7 +3,7 @@
 using Base.Dates
 import Base.Dates: value
 import Base: ==, isequal, isless
-
+import Compat: xor
 
 abstract TimeError <: Exception
 
@@ -230,7 +230,7 @@ function ZonedDateTime(dt::DateTime, tz::VariableTimeZone, is_dst::Bool)
         mask = [isdst(zdt.zone.offset) for zdt in possible]
 
         # Mask is expected to be unambiguous.
-        !($)(mask...) && throw(AmbiguousTimeError(dt, tz))
+        !xor(mask...) && throw(AmbiguousTimeError(dt, tz))
 
         occurrence = is_dst ? findfirst(mask) : findfirst(!mask)
         return possible[occurrence]
