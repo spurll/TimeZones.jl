@@ -39,11 +39,11 @@ tz = FixedTimeZone("Imaginary/Zone", 0, 0)
 
 buffer = IOBuffer()
 showerror(buffer, AmbiguousTimeError(DateTime(2015,1,1), tz))
-@test takebuf_string(buffer) == "Local DateTime 2015-01-01T00:00:00 is ambiguious"
+@test Compat.String(take!(buffer)) == "Local DateTime 2015-01-01T00:00:00 is ambiguious"
 
 buffer = IOBuffer()
 showerror(buffer, NonExistentTimeError(DateTime(2015,1,1), tz))
-@test takebuf_string(buffer) == "DateTime 2015-01-01T00:00:00 does not exist within Imaginary/Zone"
+@test Compat.String(take!(buffer)) == "DateTime 2015-01-01T00:00:00 does not exist within Imaginary/Zone"
 
 
 warsaw = resolve("Europe/Warsaw", tzdata["europe"]...)
