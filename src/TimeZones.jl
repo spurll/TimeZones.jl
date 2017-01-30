@@ -38,7 +38,7 @@ function __init__()
     Base.Dates.SLOT_RULE['z'] = TimeZone
     Base.Dates.SLOT_RULE['Z'] = TimeZone
 
-    global const ISOZonedDateTimeFormat = DateFormat("yyyy-mm-ddTHH:MM:SS.szzz")
+    global const ISOZonedDateTimeFormat = DateFormat("yyyy-mm-dd\\THH:MM:SS.szzz")
 end
 
 include("utils.jl")
